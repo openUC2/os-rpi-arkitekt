@@ -147,6 +147,12 @@ jobs:
       # TODO: move some of this into a separate GitHub Action and/or Forklift command, to keep
       # this workflow simpler
 
+      - name: Cache Forklift pallets
+        run: |
+          mkdir -p $HOME/.forklift
+          forklift dev plt cache-plt
+          forklift dev plt cache-dl
+
       - name: Set up container image pre-caching
         id: setup-precaching
         run: |
