@@ -1,11 +1,10 @@
 # os-rpi: Arkitekt robot controller pallet
 
-**This branch (`arkitekt-service`) is a separate pallet: never merge it into `edge`.** It is
-openUC2 OS for a Raspberry Pi next to a lab robot, which the Pi provides to an
-[Arkitekt](https://arkitekt.live) server. ImSwitch, the openUC2 documentation and the ImSwitch
-build steps (Hikrobot camera driver, CAN overlay, `dx` mode) are removed; the microscope pallet
-on `edge` is unchanged. The infrastructure (networking, Caddy, Cockpit, file browser, Forklift
-itself) is the same, so merge `edge` into this branch now and then to pick up its updates.
+This repo is openUC2 OS configured for a Raspberry Pi next to a lab robot, which the Pi provides to
+an [Arkitekt](https://arkitekt.live) server. ImSwitch, the openUC2 documentation and the ImSwitch
+build steps (Hikrobot camera driver, CAN overlay, `dx` mode) are removed. The infrastructure
+(networking, Caddy, Cockpit, file browser, Forklift itself) is imported via Forklift pallet file
+imports from [the openUC2/os-rpi repo](https://github.com/openUC2/os-rpi).
 
 This repo is both the [Forklift](https://github.com/PlanktoScope/forklift) pallet for the OS, and
 the automated build system for creating OS images which can be flashed onto SD cards for booting
@@ -115,47 +114,6 @@ To see the full list of deployments you can disable or enable, run `forklift plt
 for some deployments, especially some deployments whose names begin with `provisioning/`,
 `networking/`, `infra/`, and `dev/`, you will have to reboot/soft-reboot in order for changes to actually take
 effect.
-
-## Exceptional operation
-
-### Upgrading from ancient installations
-
-Machines running versions of os-rpi built a long time ago may be running a version of this repo's
-pallet which uses Docker container image that no longer exist. Trying to upgrade the pallet from
-such versions will result an error, because upgrading the pallet will require the current pallet to
-ensure it has a copy of the required container images so that the current pallet can be used as a
-rollback in case the next pallet turns out to be invalid, and Forklift does not yet try to detect
-that a local copy of the container image exists if there is no longer any remote copy of the image.
-To restore the ability to upgrade the pallet in such a circumstance, please run the following
-commands:
-
-```bash
-forklift plt upgrade --force @main
-# This command will result in output which looks something like:
-# Downloading Docker container images specified by the last successfully-applied staged pallet bundle,
-# in case the next to be applied fails to be applied...
-#   {...}
-#   Downloading ghcr.io/openuc2/imswitch-noqt:{...}...
-#   {...}
-# 2026/01/23 07:53:26 couldn't prepare staged pallet bundle {...} to be applied next:
-#   couldn't cache Docker container images required by staged pallet:
-#     couldn't download ghcr.io/openuc2/imswitch-noqt:{...}:
-#       Error response from daemon:
-#         error from registry: denied
-
-forklift stage set-next-result success
-# This command will prevent your current pallet from being used as a rollback. Warning: if the
-# version you're upgrading to is broken, things will be very broken and there won't be any automatic
-# rollback to a fully-working version!
-
-forklift stage set-next next
-# This command will download the Docker container images for the version you're upgrading to.
-
-forklift stage apply && sudo systemctl soft-reboot
-# Just to be safe, we should test whether the Docker Compose apps all load correctly before we
-# soft-reboot to fully apply the Forklift pallet. If an error occurs here, more troubleshooting will be
-# needed before it's safe to soft-reboot!
-```
 
 ## Licensing
 
