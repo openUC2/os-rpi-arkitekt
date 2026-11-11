@@ -147,11 +147,6 @@ jobs:
       # TODO: move some of this into a separate GitHub Action and/or Forklift command, to keep
       # this workflow simpler
 
-      - name: Cache Forklift pallets
-        run: |
-          mkdir -p $HOME/.forklift
-          forklift dev plt cache-plt
-          forklift dev plt cache-dl
 
       - name: Set up container image pre-caching
         id: setup-precaching
@@ -159,6 +154,8 @@ jobs:
           forklift_setup_root="./os-build/forklift"
           "$forklift_setup_root/download-forklift.sh" "/usr/bin"
 
+          forklift dev plt cache-plt
+          forklift dev plt cache-dl
           mkdir -p /tmp/forklift/container-image-precache
           echo "path=/tmp/forklift/container-image-precache" >> $GITHUB_OUTPUT
           container_list_hash="$(forklift dev plt ls-img | sha256sum | cut -d ' ' -f 1)"
