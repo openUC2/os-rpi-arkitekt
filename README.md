@@ -54,10 +54,11 @@ These are usage instructions for developers.
 
 ### Downloading an OS image
 
-The `build-os-trixie` GitHub Actions workflow builds `os-rpi-arkitekt-*.img.xz` on every push to
-this branch and on every PR, and keeps it as a workflow artifact. Flash it to an SD card with
-[Raspberry Pi Imager](https://www.raspberrypi.com/software/). Both robot containers are baked in, so
-the image works without internet at first boot.
+Go to this repo's [releases page](https://github.com/openUC2/os-rpi-arkitekt/releases), and
+download the `.img.xz` SD card image file for the release or pre-release you want to run.
+Flash it to an SD card with
+[Raspberry Pi Imager](https://www.raspberrypi.com/software/).
+The image works without internet at first boot.
 
 ### Deploying a published OS update to your machine
 
