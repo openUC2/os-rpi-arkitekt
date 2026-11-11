@@ -32,3 +32,7 @@ features:
           paths:
             - /fairino
             - /fairino/*
+      file-exports:
+        - target: shared/machine-portal-common/templates/home/apps/10-fairino.item.partial.tmpl
+        - target: shared/machine-portal-common/templates/home/apps/10-fairino.item.simple.partial.tmpl
+        - target: shared/machine-portal-common/templates/home/help/documentation/20-fairino-service.item.partial.tmpl

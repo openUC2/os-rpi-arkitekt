@@ -1,0 +1,14 @@
+package:
+  description: Official documentation for the openUC2 project
+  maintainers:
+    - name: Ethan Li
+      email: lietk12@gmail.com
+  # Note: no license has been listed for this project
+  #license: 
+  sources:
+    - https://github.com/openUC2/openUC2.github.cio
+
+deployment:
+  provides:
+    file-exports:
+        - target: shared/machine-portal-common/templates/home/help/documentation/10-project-docs.item.partial.tmpl

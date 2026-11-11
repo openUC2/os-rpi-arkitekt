@@ -32,3 +32,6 @@ features:
           paths:
             - /webcam
             - /webcam/*
+      file-exports:
+        - target: shared/machine-portal-common/templates/home/apps/10-webcam.item.partial.tmpl
+        - target: shared/machine-portal-common/templates/home/apps/10-webcam.item.simple.partial.tmpl
