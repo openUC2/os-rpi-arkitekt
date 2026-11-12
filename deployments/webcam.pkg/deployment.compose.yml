@@ -1,7 +1,7 @@
 services:
   server:
     # Built by https://github.com/stainSTORM/dockerwebcam (.github/workflows/docker.yml) on every push.
-    image: ghcr.io/stainstorm/dockerwebcam:sha-8c651d0
+    image: ghcr.io/stainstorm/dockerwebcam:sha-8c651d0@sha256:57dd2e8b9015c27cf73715559f2dbed9ffcea02798d341809c15df76c4aea5cc
     volumes:
       # A bind mount rather than `devices:`, so that the container starts without a camera and
       # sees one plugged in later (the app keeps trying to open it).
