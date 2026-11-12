@@ -1,4 +1,4 @@
-# os-rpi: Arkitekt robot controller pallet
+# os-rpi: stainSTORM robot controller pallet
 
 This repo is openUC2 OS configured for a Raspberry Pi next to a lab robot, which the Pi provides to
 an [Arkitekt](https://arkitekt.live) server. ImSwitch, the openUC2 documentation and the ImSwitch
